@@ -25,6 +25,12 @@ export function intersect(a, b) {
     axb[0] = -axb[0], axb[1] = -axb[1], axb[2] = -axb[2];
     return axb;
   }
+
+  if (a0 < epsilon2*epsilon2 && a1 > -epsilon2*epsilon2 && b0 < epsilon2*epsilon2 && b1 > -epsilon2*epsilon2) {
+    axb[0] = -axb[0], axb[1] = -axb[1], axb[2] = -axb[2];
+    return axb;
+  }
+
 }
 
 export function intersectPointOnLine(p, a) {

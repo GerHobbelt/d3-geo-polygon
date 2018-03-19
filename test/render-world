@@ -26,9 +26,21 @@ switch (projectionName) {
   case "modifiedStereographicMiller": outline = graticule.extent([[-40, -40], [80, 80]]).outline(); break;
 }
 
-var projection = d3[projectionSymbol]().precision(0.1),
-    path = d3.geoPath()
-      .projection(projection)
+
+var projection;
+
+switch(projectionSymbol) {
+    case 'geoCubic45':
+      projection = d3["geoCubic"]().angle(-45).parents([-1, 2, 0, 2, 5, 2]).rotate([0,0,45]);
+      projection.fitExtent([[0,0],[960,500]], {type:"Sphere"});
+      break;
+    default:
+      projection = d3[projectionSymbol]();
+      break;
+}
+
+var path = d3.geoPath()
+      .projection(projection.precision(0.1))
       .context(context);
 
 context.fillStyle = "#fff";
